@@ -1,28 +1,30 @@
-import { Link } from 'react-router-dom'
-import { PizzasContext } from '../context/PizzasContext'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 import { useContext } from 'react'
+import { PizzasContext } from '../context/PizzasContext'
+import { FaShoppingCart } from 'react-icons/fa'
 
-const Menu = () => {
+const Navigation = () => {
   const { carrito } = useContext(PizzasContext)
   const total = carrito.reduce(
-    (acumulador, valorActual) =>
-      acumulador + valorActual.price * valorActual.count,
-    0
+    (acumulador, valorActual) => acumulador + valorActual.price * valorActual.count, 0
   )
+  console.log(total)
+
+  const handleMenu = ({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'
+
   return (
-    <>
-      <nav className='navbar bg-body-tertiary'>
-        <div className='container-fluid'>
-          <Link className='nav-item nav-link' to='/'>
-            <h4>Pizzeria Mamma Mia</h4>
-          </Link>
-          <Link className='nav-item nav-link' to='/carrito'>
-            <h4><i className='fa-solid fa-cart-shopping' /> ${total}</h4>
-          </Link>
-        </div>
-      </nav>
-    </>
+    <Navbar expand='lg' bg='dark' data-bs-theme='dark'>
+      <Container>
+        <NavLink className={handleMenu} to='/'>
+          <Navbar.Brand>Pizzeria Mamma Mia</Navbar.Brand>
+        </NavLink>
+        <Nav className='ms-auto'>
+          <NavLink className={handleMenu} to='/carrito'> <FaShoppingCart />  $ {total} </NavLink>
+        </Nav>
+      </Container>
+    </Navbar>
   )
 }
 
-export default Menu
+export default Navigation
