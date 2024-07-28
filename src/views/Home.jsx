@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { PizzasContext } from '../context/PizzasContext.jsx'
 import { useContext } from 'react'
+import Slider from '../components/Slider.jsx'
 
 const Home = () => {
   const { pizzas } = useContext(PizzasContext)
@@ -8,12 +9,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='hero text-center pt-5'>
-        <h1 className='pt-5'>Pizzeria Mamma Mia</h1>
-        <h3 className='pt-3'>
-          ¡Tenemos todas las pizzas que podras encontrar!
-        </h3>
-      </div>
+      <Slider />
       <div className='container'>
         <div className='row mt-5 mb-5'>
           {pizzas &&
